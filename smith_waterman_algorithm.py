@@ -31,7 +31,8 @@ def get_user_input():
 	user_input = [letter for letters in raw_input("please input your dna sequence\n") for letter in letters]
 
 def get_substitution_value(a, b):
-	return 1
+	a_index = substitution_symbols.index(a)
+	print "this is the value of parameter a", a, " and this is the index of parameter a", a_index
 
 def smith_waterman():
 	for index_i, element_i in enumerate(database_sequence):
@@ -48,5 +49,6 @@ if __name__ == '__main__':
 	print substitution_symbols
 	print substitution_values
 	get_user_input()
+	get_substitution_value
 	print user_input
 	smith_waterman()
