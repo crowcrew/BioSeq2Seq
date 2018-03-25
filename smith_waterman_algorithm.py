@@ -16,7 +16,7 @@ def read_from_files():
 	openfile.close()
 	
 	# substitution matrix disk read
-	openfile = open('substitution_matrix.txt','r')
+	openfile = open('substitution_matrix_example.txt','r')
 	readfile = openfile.read().split('\n')
 	# reading the substitution matrix symbols
 	global substitution_symbols
