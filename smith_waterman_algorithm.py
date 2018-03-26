@@ -32,14 +32,12 @@ def get_user_input():
 
 def get_substitution_value(a, b):
 	a_index = substitution_symbols.index(a)
-	print "this is the value of parameter a", a, " and this is the index of parameter a", a_index
 	b_index = substitution_symbols.index(b)
-	print "this is the value of parameter b" , b, "and ihis is the index of parameter b", b_index
 	return substitution_values[a_index][b_index]
+
 def smith_waterman():
 	for index_i, element_i in enumerate(database_sequence):
 		for index_j, element_j in enumerate(user_input):
-			#print element_j, index_j
 			substitution_value = get_substitution_value(element_i, element_j)
 			
 				
