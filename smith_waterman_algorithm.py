@@ -36,12 +36,14 @@ def get_substitution_value(a, b):
 	return substitution_values[a_index][b_index]
 
 def smith_waterman():
+	global scoring_matrix
+	global gap_value
+	scoring_matrix = [[0]*len(user_input)]*len(database_sequence)
 	for index_i, element_i in enumerate(database_sequence):
 		for index_j, element_j in enumerate(user_input):
 			substitution_value = get_substitution_value(element_i, element_j)
-			
-				
-	
+			scoring_matrix[index_i][index_j]= max (scoring_matrix[index_i-1][index_j-1]+substitution_value, scoring_matrix[index_i-1][index_j]+gap_value ,scoring_matrix[index_i][index_j-1] +gap_value , scoring_matrix[index_i][index_j])
+			print scoring_matrix
 
 if __name__ == '__main__':
 	read_from_files()
