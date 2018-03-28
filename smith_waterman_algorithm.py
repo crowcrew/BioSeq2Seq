@@ -45,7 +45,7 @@ def smith_waterman():
 			substitution_value = get_substitution_value(element_i, element_j)
 			scoring_matrix[index_i+1][index_j+1] = max(scoring_matrix[index_i][index_j]+substitution_value, scoring_matrix[index_i][index_j+1]+gap_value, scoring_matrix[index_i+1][index_j]+gap_value, scoring_matrix[index_i+1][index_j+1])
 			max_score = max(max_score, scoring_matrix[index_i+1][index_j+1])
-			print scoring_matrix[index_i+1][index_j+1]
+			print scoring_matrix
 	print scoring_matrix
 	print max_score
 	print max(scoring_matrix)
