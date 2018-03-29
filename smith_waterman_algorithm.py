@@ -5,6 +5,7 @@ substitution_symbols = [] # from substitution_matrix.txt
 substitution_values = [] # from substitution_matrix.txt
 user_input = []
 scoring_matrix = []
+max_score = []
 gap_value = -2
 
 def read_from_files():
@@ -26,6 +27,9 @@ def read_from_files():
 	substitution_values = [map(int,number) for number in [line.split(' ') for line in readfile[1:] if len(line)>0]]
 	openfile.close()
 
+def maxtuple(a, b):
+	return (a, b)[a[0]>b[0]]
+
 def get_user_input():
 	global user_input
 	user_input = [letter for letters in raw_input("please input your dna sequence\n") for letter in letters]
@@ -38,13 +42,14 @@ def get_substitution_value(a, b):
 def smith_waterman():
 	global scoring_matrix
 	global gap_value
-	max_score = -1000
+	global max_score
+	max_score = [-1000,-1,-1]
 	scoring_matrix = [[0 for x in range(len(user_input)+1)] for y in range(len(database_sequence)+1)]
 	for index_i, element_i in enumerate(database_sequence):
 		for index_j, element_j in enumerate(user_input):
 			substitution_value = get_substitution_value(element_i, element_j)
 			scoring_matrix[index_i+1][index_j+1] = max(scoring_matrix[index_i][index_j]+substitution_value, scoring_matrix[index_i][index_j+1]+gap_value, scoring_matrix[index_i+1][index_j]+gap_value, scoring_matrix[index_i+1][index_j+1])
-			max_score = max(max_score, scoring_matrix[index_i+1][index_j+1])
+			max_score = max(max_score, [scoring_matrix[index_i+1][index_j+1],index_i+1,index_j+1])
 	
 
 if __name__ == '__main__':
@@ -57,19 +62,4 @@ if __name__ == '__main__':
 	print user_input
 	smith_waterman()
 	print scoring_matrix
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	print max_score
