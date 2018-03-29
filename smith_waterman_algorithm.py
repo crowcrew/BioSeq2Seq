@@ -28,7 +28,7 @@ def read_from_files():
 	openfile.close()
 
 def maxtuple(a, b):
-	return (a, b)[a[0]>b[0]]
+	return (a, b)[a[0]<b[0]]
 
 def get_user_input():
 	global user_input
@@ -49,7 +49,7 @@ def smith_waterman():
 		for index_j, element_j in enumerate(user_input):
 			substitution_value = get_substitution_value(element_i, element_j)
 			scoring_matrix[index_i+1][index_j+1] = max(scoring_matrix[index_i][index_j]+substitution_value, scoring_matrix[index_i][index_j+1]+gap_value, scoring_matrix[index_i+1][index_j]+gap_value, scoring_matrix[index_i+1][index_j+1])
-			max_score = max(max_score, [scoring_matrix[index_i+1][index_j+1],index_i+1,index_j+1])
+			max_score = maxtuple(max_score, [scoring_matrix[index_i+1][index_j+1],index_i+1,index_j+1])
 	
 
 if __name__ == '__main__':
