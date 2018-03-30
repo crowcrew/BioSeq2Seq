@@ -50,6 +50,21 @@ def smith_waterman():
 			substitution_value = get_substitution_value(element_i, element_j)
 			scoring_matrix[index_i+1][index_j+1] = max(scoring_matrix[index_i][index_j]+substitution_value, scoring_matrix[index_i][index_j+1]+gap_value, scoring_matrix[index_i+1][index_j]+gap_value, scoring_matrix[index_i+1][index_j+1])
 			max_score = maxtuple(max_score, [scoring_matrix[index_i+1][index_j+1],index_i+1,index_j+1])
+
+	result = []
+	while max_score != 0 :
+		substitution_value = get_substitution_value(database_sequence[max_score[1]], user_input[max_score[2]])
+		max_score_temp = maxtuple ([scoring_matrix[max_score[1]-1][max_score[2]-1]+substitution_value , max_score[1]-1 , max_score[2]-1], [scoring_matrix[max_score[1]][max_score[2]-1]+gap_value,max_score[1]][max_score[2]-1], [scoring_matrix[max_score[1]-1][max_score[2]]+gap_value,max_score[1]-1][max_score[2]])
+		if max_score[2] != max_score_temp[2] and max_score[1] != max_score_temp[1] :
+			result.append ([database_sequence[max_score[1]],user_input[max_score[2]]])
+		else if max_score[2] != max_score_temp[2] and max_score[1] == max_score_temp[1] :
+			result.append (['-',user_input[max_score[2]]])
+		else if max_score[2] == max_score_temp[2] and max_score[1] != max_score_temp[1] :
+			result.append ([database_sequence[max_score[1]],'-'])
+
+
+				
+			
 	
 
 if __name__ == '__main__':
