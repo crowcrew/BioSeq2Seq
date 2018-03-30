@@ -61,6 +61,7 @@ def smith_waterman():
 			result.append (['-',user_input[max_score[2]]])
 		else if max_score[2] == max_score_temp[2] and max_score[1] != max_score_temp[1] :
 			result.append ([database_sequence[max_score[1]],'-'])
+		max_score = max_score_temp
 
 
 				
