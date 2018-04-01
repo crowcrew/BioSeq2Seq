@@ -54,7 +54,7 @@ def get_substitution_value(a, b):
 def backtracking(max_score, result=[]):
 	global scoring_matrix
 	global gap_value
-	while max_score[1] >= 0 and max_score[2] >= 0 :
+	while max_score[1] > 0 and max_score[2] > 0 :
 		substitution_value = get_substitution_value(database_sequence[max_score[1]-1], user_input[max_score[2]-1])
 		max_score_temp = maxtuple (\
 				[scoring_matrix[max_score[1]-1][max_score[2]-1]+substitution_value , max_score[1]-1 , max_score[2]-1],\
@@ -62,7 +62,13 @@ def backtracking(max_score, result=[]):
  				[scoring_matrix[max_score[1]-1][max_score[2]]+gap_value,max_score[1]-1,max_score[2]])
 		if type(max(max_score_temp))==list:
 			for tuple_index in range(len(max_score_temp)):
-				backtracking([scoring_matrix[max_score_temp[tuple_index][1]][max_score_temp[tuple_index][2]],max_score_temp[tuple_index][1],max_score_temp[tuple_index][2]], result=result)
+				if max_score[2] != max_score_temp[tuple_index][2] and max_score[1] != max_score_temp[tuple_index][1] :
+					tempresult = [(database_sequence[max_score[1]-1],user_input[max_score[2]-1])] + result
+				elif max_score[2] != max_score_temp[tuple_index][2] and max_score[1] == max_score_temp[tuple_index][1] :
+					tempresult = [('-',user_input[max_score[2]-1])] + result
+				elif max_score[2] == max_score_temp[tuple_index][2] and max_score[1] != max_score_temp[tuple_index][1] :
+					tempresult = [(database_sequence[max_score[1]-1],'-')] + result
+				backtracking([scoring_matrix[max_score_temp[tuple_index][1]][max_score_temp[tuple_index][2]],max_score_temp[tuple_index][1],max_score_temp[tuple_index][2]], result=tempresult)
 			return
 		else:
 			if max_score[2] != max_score_temp[2] and max_score[1] != max_score_temp[1] :
@@ -89,7 +95,7 @@ def needleman_wunsch():
 	last_score = [scoring_matrix[len(database_sequence)][len(user_input)],len(database_sequence),len(user_input)]
 	
 	backtracking(last_score)
-	print finalresults
+	print np.array(finalresults)
 
 				
 			
