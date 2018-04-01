@@ -30,7 +30,7 @@ def read_from_files():
 def maxtuple(*args):
 	maxval = [-1000,-1,-1]
 	for arg_index in range(len(args)):
-		intermaxval = (args[arg_index], maxval)[args[arg_index][0]<maxval[0]]
+		maxval = (args[arg_index], maxval)[args[arg_index][0]<maxval[0]]
 	maxvaltuple = [maxval]
 	for arg_index in range(len(args)):
 		if args[arg_index][0] == maxval[0] and (args[arg_index][1] != maxval[1] or args[arg_index][2] != maxval[2]):
