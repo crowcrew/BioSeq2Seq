@@ -1,4 +1,5 @@
 import sys
+import numpy as np
 
 database_sequence = []
 substitution_symbols = [] # from substitution_matrix.txt
@@ -30,7 +31,7 @@ def read_from_files():
 def maxtuple(*args):
 	maxval = [-1000,-1,-1]
 	for arg_index in range(len(args)):
-		qmaxval = (args[arg_index], maxval)[args[arg_index][0]<maxval[0]]
+		maxval = (args[arg_index], maxval)[args[arg_index][0]<maxval[0]]
 	maxvaltuple = [maxval]
 	for arg_index in range(len(args)):
 		if args[arg_index][0] == maxval[0] and (args[arg_index][1] != maxval[1] or args[arg_index][2] != maxval[2]):
@@ -60,16 +61,16 @@ def backtracking(max_score, result=[]):
  				[scoring_matrix[max_score[1]][max_score[2]-1]+gap_value,max_score[1],max_score[2]-1],\
  				[scoring_matrix[max_score[1]-1][max_score[2]]+gap_value,max_score[1]-1,max_score[2]])
 		if type(max(max_score_temp))==list:
-			for tuple_index in len(max_score_temp):
+			for tuple_index in range(len(max_score_temp)):
 				backtracking([scoring_matrix[max_score_temp[tuple_index][1]][max_score_temp[tuple_index][2]],max_score_temp[tuple_index][1],max_score_temp[tuple_index][2]], result=result)
 			return
 		else:
 			if max_score[2] != max_score_temp[2] and max_score[1] != max_score_temp[1] :
-				result = [database_sequence[max_score[1]-1],user_input[max_score[2]-1]] + result
+				result = [(database_sequence[max_score[1]-1],user_input[max_score[2]-1])] + result
 			elif max_score[2] != max_score_temp[2] and max_score[1] == max_score_temp[1] :
-				result = ['-',user_input[max_score[2]-1]] + result
+				result = [('-',user_input[max_score[2]-1])] + result
 			elif max_score[2] == max_score_temp[2] and max_score[1] != max_score_temp[1] :
-				result = [database_sequence[max_score[1]-1],'-'] + result
+				result = [(database_sequence[max_score[1]-1],'-')] + result
 			max_score = [scoring_matrix[max_score_temp[1]][max_score_temp[2]],max_score_temp[1],max_score_temp[2]]
 	finalresults.append(result)
 
@@ -77,7 +78,7 @@ def needleman_wunsch():
 	global scoring_matrix
 	global gap_value
 	
-	scoring_matrix = [[-1*x+(-1*y) for x in range(len(user_input)+1)] for y in range(len(database_sequence)+1)]
+	scoring_matrix = np.array([[-1*x+(-1*y) for x in range(len(user_input)+1)] for y in range(len(database_sequence)+1)])
 	for index_i, element_i in enumerate(database_sequence):
 		for index_j, element_j in enumerate(user_input):
 			substitution_value = get_substitution_value(element_i, element_j)
@@ -85,7 +86,7 @@ def needleman_wunsch():
 			
 			
 	print "scoring matrix:\n", scoring_matrix
-	last_score = (scoring_matrix[len(database_sequence)][len(user_input)],len(database_sequence),len(user_input))
+	last_score = [scoring_matrix[len(database_sequence)][len(user_input)],len(database_sequence),len(user_input)]
 	
 	backtracking(last_score)
 	print finalresults
