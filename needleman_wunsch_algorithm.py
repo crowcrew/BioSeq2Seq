@@ -1,5 +1,5 @@
 import sys
-import numpy as np
+
 
 database_sequence = []
 substitution_symbols = [] # from substitution_matrix.txt
@@ -12,7 +12,7 @@ finalresults = []
 def read_from_files():
 	# database sequence disk read
 	global database_sequence
-	openfile =  open('database_sequence_needleman_wunsch.fa', 'r')
+	openfile =  open('database_sequence_example_needleman_wunsch.fa', 'r')
 	readfile = openfile.read().split('\n')
 	database_sequence = [letter for letters in [line for line in readfile[1:] if len(line)>0] for letter in letters]
 	openfile.close()

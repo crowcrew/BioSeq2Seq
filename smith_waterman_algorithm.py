@@ -11,13 +11,13 @@ finalresults = []
 def read_from_files():
 	# database sequence disk read
 	global database_sequence
-	openfile =  open('database_sequence_example.fa', 'r')
+	openfile =  open('database_sequence_example_smith_waterman.fa', 'r')
 	readfile = openfile.read().split('\n')
 	database_sequence = [letter for letters in [line for line in readfile[1:] if len(line)>0] for letter in letters]
 	openfile.close()
 	
 	# substitution matrix disk read
-	openfile = open('substitution_matrix_example.txt','r')
+	openfile = open('substitution_matrix_example_smith_waterman.txt','r')
 	readfile = openfile.read().split('\n')
 	# reading the substitution matrix symbols
 	global substitution_symbols
