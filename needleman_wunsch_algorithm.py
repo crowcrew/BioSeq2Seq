@@ -1,6 +1,7 @@
 import sys
 
 
+
 database_sequence = []
 substitution_symbols = [] # from substitution_matrix.txt
 substitution_values = [] # from substitution_matrix.txt
@@ -84,7 +85,7 @@ def needleman_wunsch():
 	global scoring_matrix
 	global gap_value
 	
-	scoring_matrix = np.array([[-1*x+(-1*y) for x in range(len(user_input)+1)] for y in range(len(database_sequence)+1)])
+	scoring_matrix =[[-1*x+(-1*y) for x in range(len(user_input)+1)] for y in range(len(database_sequence)+1)]
 	for index_i, element_i in enumerate(database_sequence):
 		for index_j, element_j in enumerate(user_input):
 			substitution_value = get_substitution_value(element_i, element_j)
@@ -95,7 +96,7 @@ def needleman_wunsch():
 	last_score = [scoring_matrix[len(database_sequence)][len(user_input)],len(database_sequence),len(user_input)]
 	
 	backtracking(last_score)
-	print np.array(finalresults)
+	print [finalresults]
 
 				
 			
