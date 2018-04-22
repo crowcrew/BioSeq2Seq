@@ -60,16 +60,22 @@ def backtracking(max_score, result=[]):
  				[scoring_matrix[max_score[1]][max_score[2]-1]+gap_value,max_score[1],max_score[2]-1],\
  				[scoring_matrix[max_score[1]-1][max_score[2]]+gap_value,max_score[1]-1,max_score[2]])
 		if type(max(max_score_temp))==list:
-			for tuple_index in len(max_score_temp):
-				backtracking([scoring_matrix[max_score_temp[tuple_index][1]][max_score_temp[tuple_index][2]],max_score_temp[tuple_index][1],max_score_temp[tuple_index][2]], result=result)
+			for tuple_index in range(len(max_score_temp)):
+				if max_score[2] != max_score_temp[tuple_index][2] and max_score[1] != max_score_temp[tuple_index][1] :
+					tempresult = [(database_sequence[max_score[1]-1],user_input[max_score[2]-1])] + result
+				elif max_score[2] != max_score_temp[tuple_index][2] and max_score[1] == max_score_temp[tuple_index][1] :
+					tempresult = [('-',user_input[max_score[2]-1])] + result
+				elif max_score[2] == max_score_temp[tuple_index][2] and max_score[1] != max_score_temp[tuple_index][1] :
+					tempresult = [(database_sequence[max_score[1]-1],'-')] + result
+				backtracking([scoring_matrix[max_score_temp[tuple_index][1]][max_score_temp[tuple_index][2]],max_score_temp[tuple_index][1],max_score_temp[tuple_index][2]], result=tempresult)
 			return
 		else:
 			if max_score[2] != max_score_temp[2] and max_score[1] != max_score_temp[1] :
-				result = [database_sequence[max_score[1]-1],user_input[max_score[2]-1]] + result
+				result = [(database_sequence[max_score[1]-1],user_input[max_score[2]-1])] + result
 			elif max_score[2] != max_score_temp[2] and max_score[1] == max_score_temp[1] :
-				result = ['-',user_input[max_score[2]-1]] + result
+				result = [('-',user_input[max_score[2]-1])] + result
 			elif max_score[2] == max_score_temp[2] and max_score[1] != max_score_temp[1] :
-				result = [database_sequence[max_score[1]-1],'-'] + result
+				result = [(database_sequence[max_score[1]-1],'-')] + result
 			max_score = [scoring_matrix[max_score_temp[1]][max_score_temp[2]],max_score_temp[1],max_score_temp[2]]
 	finalresults.append(result)
 
