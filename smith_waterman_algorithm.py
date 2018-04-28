@@ -2,25 +2,28 @@ import sys
 
 class smith_waterman(object):
 
-	def __init__(self,user_input,requested_database_filenames):
+	def __init__(self, user_input, requested_database_filenames):
 		self.user_input = [letter for letters in user_input for letter in letters]
+		self.substitution_symbols = []
+		self.substitution_values = []
+		self.gap_value = -2
+		self.init_shared_parameters()
 		for filename in requested_database_filenames :
 			self.database_sequence = []
-			self.substitution_symbols = [] # from substitution_matrix.txt
-			self.substitution_values = [] # from substitution_matrix.txt
 			self.scoring_matrix = []
-			self.gap_value = -2
 			self.finalresults = []
 			self.read_from_files(filename)
 			self.smith_waterman()
 
-	def read_from_files(self):
+	def read_from_files(self, filename):
 		# database sequence disk read
-		openfile =  open('database_sequence_example_smith_waterman.fa', 'r')
+		openfile =  open(filename, 'r')
 		readfile = openfile.read().split('\n')
 		self.database_sequence = [letter for letters in [line for line in readfile[1:] if len(line)>0] for letter in letters]
 		openfile.close()
-	
+		print "database sequence:\n", self.database_sequence
+		
+	def init_shared_parameters(self):
 		# substitution matrix disk read
 		openfile = open('substitution_matrix_example_smith_waterman.txt','r')
 		readfile = openfile.read().split('\n')
@@ -29,7 +32,6 @@ class smith_waterman(object):
 		# reading the substitution matrix values
 		self.substitution_values = [map(int,number) for number in [line.split(' ') for line in readfile[1:] if len(line)>0]]
 		openfile.close()
-		print "database sequence:\n", self.database_sequence
 		print "substitution symbols:\n", self.substitution_symbols
 		print "substitution values:\n", self.substitution_values
 
@@ -97,5 +99,5 @@ class smith_waterman(object):
 
 
 if __name__ == '__main__' :
-	sw = smith_waterman('TGTTACGG',[database_sequence_example_smith_waterman.fa])
+	sw = smith_waterman('TGTTACGG',['database_sequence_example_smith_waterman.fa'])
 
