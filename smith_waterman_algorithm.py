@@ -6,7 +6,7 @@ class smith_waterman(object):
 		self.database_sequence = []
 		self.substitution_symbols = [] # from substitution_matrix.txt
 		self.substitution_values = [] # from substitution_matrix.txt
-		self.user_input = user_input
+		self.user_input = [letter for letters in user_input for letter in letters]
 		self.scoring_matrix = []
 		self.gap_value = -2
 		self.finalresults = []
