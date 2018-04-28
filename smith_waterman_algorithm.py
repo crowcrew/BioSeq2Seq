@@ -97,5 +97,5 @@ class smith_waterman(object):
 
 
 if __name__ == '__main__' :
-	sw = smith_waterman()
+	sw = smith_waterman('TGTTACGG')
 
