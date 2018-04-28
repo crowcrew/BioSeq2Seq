@@ -2,16 +2,17 @@ import sys
 
 class smith_waterman(object):
 
-	def __init__(self,user_input):
-		self.database_sequence = []
-		self.substitution_symbols = [] # from substitution_matrix.txt
-		self.substitution_values = [] # from substitution_matrix.txt
+	def __init__(self,user_input,requested_database_filenames):
 		self.user_input = [letter for letters in user_input for letter in letters]
-		self.scoring_matrix = []
-		self.gap_value = -2
-		self.finalresults = []
-		self.read_from_files()
-		self.smith_waterman()
+		for filename in requested_database_filenames :
+			self.database_sequence = []
+			self.substitution_symbols = [] # from substitution_matrix.txt
+			self.substitution_values = [] # from substitution_matrix.txt
+			self.scoring_matrix = []
+			self.gap_value = -2
+			self.finalresults = []
+			self.read_from_files(filename)
+			self.smith_waterman()
 
 	def read_from_files(self):
 		# database sequence disk read
@@ -96,5 +97,5 @@ class smith_waterman(object):
 
 
 if __name__ == '__main__' :
-	sw = smith_waterman('TGTTACGG')
+	sw = smith_waterman('TGTTACGG',[database_sequence_example_smith_waterman.fa])
 
