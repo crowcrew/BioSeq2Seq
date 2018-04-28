@@ -2,16 +2,15 @@ import sys
 
 class smith_waterman(object):
 
-	def __init__(self):
+	def __init__(self,user_input):
 		self.database_sequence = []
 		self.substitution_symbols = [] # from substitution_matrix.txt
 		self.substitution_values = [] # from substitution_matrix.txt
-		self.user_input = []
+		self.user_input = user_input
 		self.scoring_matrix = []
 		self.gap_value = -2
 		self.finalresults = []
 		self.read_from_files()
-		self.get_user_input()
 		self.get_substitution_value
 		self.smith_waterman()
 
@@ -47,8 +46,6 @@ class smith_waterman(object):
 		else:
 			return maxval
 
-	def get_user_input(self):
-		self.user_input = [letter for letters in raw_input("please input your dna sequence\n") for letter in letters]
 		print "user input:\n", self.user_input
 	def get_substitution_value(self,a, b):
 		a_index = self.substitution_symbols.index(a)
