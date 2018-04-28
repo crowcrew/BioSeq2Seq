@@ -10,8 +10,12 @@ class smith_waterman(object):
 		self.scoring_matrix = []
 		self.gap_value = -2
 		self.finalresults = []
+		self.read_from_files()
+		self.get_user_input()
+		self.get_substitution_value
+		self.smith_waterman()
 
-	def read_from_files():
+	def read_from_files(self):
 		# database sequence disk read
 		openfile =  open('database_sequence_example_smith_waterman.fa', 'r')
 		readfile = openfile.read().split('\n')
@@ -26,8 +30,11 @@ class smith_waterman(object):
 		# reading the substitution matrix values
 		self.substitution_values = [map(int,number) for number in [line.split(' ') for line in readfile[1:] if len(line)>0]]
 		openfile.close()
+		print "database sequence:\n", self.database_sequence
+		print "substitution symbols:\n", self.substitution_symbols
+		print "substitution values:\n", self.substitution_values
 
-	def maxtuple(*args):
+	def maxtuple(self,*args):
 		maxval = [-1000,-1,-1]
 		for arg_index in range(len(args)):
 			maxval = (args[arg_index], maxval)[args[arg_index][0]<maxval[0]]
@@ -40,19 +47,19 @@ class smith_waterman(object):
 		else:
 			return maxval
 
-	def get_user_input():
+	def get_user_input(self):
 		self.user_input = [letter for letters in raw_input("please input your dna sequence\n") for letter in letters]
-
-	def get_substitution_value(a, b):
+		print "user input:\n", self.user_input
+	def get_substitution_value(self,a, b):
 		a_index = self.substitution_symbols.index(a)
 		b_index = self.substitution_symbols.index(b)
 		return self.substitution_values[a_index][b_index]
 
 
-	def backtracking(max_score, result=[]):
+	def backtracking(self,max_score, result=[]):
 		while max_score[0] > 0 :
-			substitution_value = get_substitution_value(self.database_sequence[max_score[1]-1], self.user_input[max_score[2]-1])
-			max_score_temp = maxtuple (\
+			substitution_value = self.get_substitution_value(self.database_sequence[max_score[1]-1], self.user_input[max_score[2]-1])
+			max_score_temp = self.maxtuple (\
 					[self.scoring_matrix[max_score[1]-1][max_score[2]-1]+substitution_value , max_score[1]-1 , max_score[2]-1],\
 	 				[self.scoring_matrix[max_score[1]][max_score[2]-1]+gap_value,max_score[1],max_score[2]-1],\
 	 				[self.scoring_matrix[max_score[1]-1][max_score[2]]+gap_value,max_score[1]-1,max_score[2]])
@@ -64,7 +71,7 @@ class smith_waterman(object):
 						tempresult = [('-',self.user_input[max_score[2]-1])] + result
 					elif max_score[2] == max_score_temp[tuple_index][2] and max_score[1] != max_score_temp[tuple_index][1] :
 						tempresult = [(self.database_sequence[max_score[1]-1],'-')] + result
-					backtracking([self.scoring_matrix[max_score_temp[tuple_index][1]][max_score_temp[tuple_index][2]],max_score_temp[tuple_index][1],max_score_temp[tuple_index][2]], result=tempresult)
+					self.backtracking([self.scoring_matrix[max_score_temp[tuple_index][1]][max_score_temp[tuple_index][2]],max_score_temp[tuple_index][1],max_score_temp[tuple_index][2]], result=tempresult)
 				return
 			else:
 				if max_score[2] != max_score_temp[2] and max_score[1] != max_score_temp[1] :
@@ -76,31 +83,43 @@ class smith_waterman(object):
 				max_score = [self.scoring_matrix[max_score_temp[1]][max_score_temp[2]],max_score_temp[1],max_score_temp[2]]
 		self.finalresults.append(result)
 
-	def smith_waterman():
+	def smith_waterman(self):
 		max_score = [-1000,-1,-1]
 		self.scoring_matrix = [[0 for x in range(len(self.user_input)+1)] for y in range(len(self.database_sequence)+1)]
 		for index_i, element_i in enumerate(self.database_sequence):
 			for index_j, element_j in enumerate(self.user_input):
-				substitution_value = get_substitution_value(element_i, element_j)
+				substitution_value = self.get_substitution_value(element_i, element_j)
 				self.scoring_matrix[index_i+1][index_j+1] = max(self.scoring_matrix[index_i][index_j]+substitution_value, self.scoring_matrix[index_i][index_j+1]+gap_value, self.scoring_matrix[index_i+1][index_j]+gap_value, self.scoring_matrix[index_i+1][index_j+1])
-				max_score = maxtuple(max_score, [self.scoring_matrix[index_i+1][index_j+1],index_i+1,index_j+1])
+				max_score = self.maxtuple(max_score, [self.scoring_matrix[index_i+1][index_j+1],index_i+1,index_j+1])
 				if type(max(max_score))==list:
 					max_score = max_score[0]
 		print "scoring matrix:\n", self.scoring_matrix
 		print "max score:\n", max_score
-		backtracking(max_score)
+		self.backtracking(max_score)
 		print self.finalresults
 
-				
-			
-	
 
-if __name__ == '__main__':
-	read_from_files()
-	print "database sequence:\n", self.database_sequence
-	print "substitution symbols:\n", self.substitution_symbols
-	print "substitution values:\n", self.substitution_values
-	get_user_input()
-	get_substitution_value
-	print "user input:\n", self.user_input
-	smith_waterman()
+if __name__ == '__main__' :
+	sw == smithwaterman()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
