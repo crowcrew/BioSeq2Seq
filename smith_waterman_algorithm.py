@@ -11,7 +11,6 @@ class smith_waterman(object):
 		self.gap_value = -2
 		self.finalresults = []
 		self.read_from_files()
-		self.get_substitution_value
 		self.smith_waterman()
 
 	def read_from_files(self):
