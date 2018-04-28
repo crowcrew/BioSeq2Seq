@@ -61,8 +61,8 @@ class smith_waterman(object):
 			substitution_value = self.get_substitution_value(self.database_sequence[max_score[1]-1], self.user_input[max_score[2]-1])
 			max_score_temp = self.maxtuple (\
 					[self.scoring_matrix[max_score[1]-1][max_score[2]-1]+substitution_value , max_score[1]-1 , max_score[2]-1],\
-	 				[self.scoring_matrix[max_score[1]][max_score[2]-1]+gap_value,max_score[1],max_score[2]-1],\
-	 				[self.scoring_matrix[max_score[1]-1][max_score[2]]+gap_value,max_score[1]-1,max_score[2]])
+	 				[self.scoring_matrix[max_score[1]][max_score[2]-1]+self.gap_value,max_score[1],max_score[2]-1],\
+	 				[self.scoring_matrix[max_score[1]-1][max_score[2]]+self.gap_value,max_score[1]-1,max_score[2]])
 			if type(max(max_score_temp))==list:
 				for tuple_index in range(len(max_score_temp)):
 					if max_score[2] != max_score_temp[tuple_index][2] and max_score[1] != max_score_temp[tuple_index][1] :
@@ -89,7 +89,7 @@ class smith_waterman(object):
 		for index_i, element_i in enumerate(self.database_sequence):
 			for index_j, element_j in enumerate(self.user_input):
 				substitution_value = self.get_substitution_value(element_i, element_j)
-				self.scoring_matrix[index_i+1][index_j+1] = max(self.scoring_matrix[index_i][index_j]+substitution_value, self.scoring_matrix[index_i][index_j+1]+gap_value, self.scoring_matrix[index_i+1][index_j]+gap_value, self.scoring_matrix[index_i+1][index_j+1])
+				self.scoring_matrix[index_i+1][index_j+1] = max(self.scoring_matrix[index_i][index_j]+substitution_value, self.scoring_matrix[index_i][index_j+1]+self.gap_value, self.scoring_matrix[index_i+1][index_j]+self.gap_value, self.scoring_matrix[index_i+1][index_j+1])
 				max_score = self.maxtuple(max_score, [self.scoring_matrix[index_i+1][index_j+1],index_i+1,index_j+1])
 				if type(max(max_score))==list:
 					max_score = max_score[0]
@@ -100,26 +100,5 @@ class smith_waterman(object):
 
 
 if __name__ == '__main__' :
-	sw == smithwaterman()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	sw = smith_waterman()
 
