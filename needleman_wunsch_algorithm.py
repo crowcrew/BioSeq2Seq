@@ -23,7 +23,7 @@ class needleman_wunsch(object):
 
 
 	def init_shared_parameters(self):
-		openfile = open('substitution_matrix_example_needleman_wunsch.txt','r')
+		openfile = open('hyperparameters/substitution_matrix_example_needleman_wunsch.txt','r')
 		readfile = openfile.read().split('\n')
 		self.substitution_symbols
 		self.substitution_symbols = [symbol for symbol in readfile[0] if symbol!=' ']
@@ -102,7 +102,7 @@ class needleman_wunsch(object):
 	
 
 if __name__ == '__main__':
-	nw = needleman_wunsch('GCATGCU',['database_sequence_example_needleman_wunsch.fa'])
+	nw = needleman_wunsch('GCATGCU',['database/database_sequence_example_needleman_wunsch.fa'])
 
 
 

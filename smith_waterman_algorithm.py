@@ -25,7 +25,7 @@ class smith_waterman(object):
 		
 	def init_shared_parameters(self):
 		# substitution matrix disk read
-		openfile = open('substitution_matrix_example_smith_waterman.txt','r')
+		openfile = open('hyperparameters/substitution_matrix_example_smith_waterman.txt','r')
 		readfile = openfile.read().split('\n')
 		# reading the substitution matrix symbols
 		self.substitution_symbols = [symbol for symbol in readfile[0] if symbol!=' ']
@@ -99,5 +99,5 @@ class smith_waterman(object):
 
 
 if __name__ == '__main__' :
-	sw = smith_waterman('TGTTACGG',['database_sequence_example_smith_waterman.fa'])
+	sw = smith_waterman('TGTTACGG',['database/database_sequence_example_smith_waterman.fa'])
 
