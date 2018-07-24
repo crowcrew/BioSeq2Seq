@@ -1,18 +1,25 @@
-import sys
-import numpy as np
+import sys, os
+from os import listdir
+from os.path import isfile, join
+#import numpy as np
 
 
 class smith_waterman(object):
 
     def __init__(self, user_input, requested_database_filenames):
         self.user_input = [
-            letter for letters in user_input for letter in letters
+            letter
+            for letters in [line for line in user_input[user_input.find("\n")+1:] if len(line) > 0]
+            for letter in letters if letter != '\n'
         ]
+        print(self.user_input)
         self.substitution_symbols = []
         self.substitution_values = []
         self.overall_results = []
         self.gap_value = -2
         self.init_shared_parameters()
+        if len(requested_database_filenames) == 1 and os.path.isdir(requested_database_filenames[0]):
+            requested_database_filenames = [requested_database_filenames[0] + f for f in listdir(requested_database_filenames[0]) if isfile(join(requested_database_filenames[0], f))]
         for filename in requested_database_filenames:
             self.database_sequence = []
             self.scoring_matrix = []
@@ -21,7 +28,7 @@ class smith_waterman(object):
             self.smith_waterman()
 
     def return_overall_results(self):
-        return np.array(self.overall_results)
+        return self.overall_results
 
     def read_from_files(self, filename):
         # database sequence disk read

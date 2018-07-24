@@ -1,0 +1,58 @@
+body{
+    text-align: center;
+}
+
+.form-group {
+    text-align: center;
+}
+
+.alignmentWrapper {
+    padding: 5vw;
+}
+
+.fileLabel {
+	float:center; margin-left:auto; margin-right:auto; color: #1D2951;
+}
+
+.oneAlignmentTable {
+        border-collapse: collapse; float:center; margin-left:auto; margin-right:auto; 
+    }
+
+
+.oneAlignmentTd {
+	display: inline-block;
+}
+
+.modifiedCard {
+	padding: 2vw;
+}
+
+
+.list {
+    overflow-y:scroll;
+    overflow-x:scroll;
+    list-style-type: none;
+}
+
+.selected {
+    color: #004FDB;
+}
+
+li{
+    cursor: pointer;
+}
+
+
+::-webkit-scrollbar {
+    width:10px;
+    height:10px;
+}
+::-webkit-scrollbar-track {
+    background: white;
+}
+::-webkit-scrollbar-thumb {
+    background: tomato;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: navy;
+}
