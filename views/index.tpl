@@ -7,7 +7,8 @@
         <script src="static/js/jquery-3.3.1.min.js"></script>
         <script src="static/js/bootstrap.js"></script>
         <script src="static/js/app.js"></script>
-        <title>JS Bin</title>
+        <title>Sequence Alignment Algorithms</title>
+        <link rel="shortcut icon" href="static/image/favicon.ico" type="image/x-icon">
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">

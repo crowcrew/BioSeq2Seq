@@ -39,7 +39,6 @@ def getalignment():
     selected_database_files = ["database/"+selected_file for selected_file in selected_database_files]
     user_file =  request.POST['user_file'].file.read()
     selected_algorithm = request.POST['selected_algorithm']
-    print('in server: ', user_file)
     result = findalignments(user_file, selected_database_files, selected_algorithm)
     import json
     result = json.dumps(result)

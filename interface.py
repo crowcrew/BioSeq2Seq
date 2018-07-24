@@ -5,7 +5,6 @@ from algorithm_smith_waterman import *
 
 
 def findalignments(user_file, sellected_database_files, selected_algorithm):
-    print('interface ', user_file, sellected_database_files, selected_algorithm)
     result = []
     if selected_algorithm == 'needleman_wunsch':
         nw = needleman_wunsch(user_file, sellected_database_files)

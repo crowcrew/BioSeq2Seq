@@ -1,7 +1,7 @@
 import sys, os
 from os import listdir
 from os.path import isfile, join
-#import numpy as np
+import numpy as np
 
 
 class needleman_wunsch(object):
@@ -76,7 +76,7 @@ class needleman_wunsch(object):
         return self.substitution_values[a_index][b_index]
 
     def backtracking(self, max_score, result=[]):
-        while max_score[1] > 0 and max_score[2] > 0:
+        while max_score[0] >= 0 and max_score[1] > 0 and max_score[2] > 0:
             substitution_value = self.get_substitution_value(
                 self.database_sequence[max_score[1] - 1],
                 self.user_input[max_score[2] - 1])
@@ -85,8 +85,7 @@ class needleman_wunsch(object):
                [self.scoring_matrix[max_score[1]][max_score[2]-1]+self.gap_value,max_score[1],max_score[2]-1],\
                [self.scoring_matrix[max_score[1]-1][max_score[2]]+self.gap_value,max_score[1]-1,max_score[2]])
             if type(max(max_score_temp)) == list:
-                for tuple_index in range(len(tuple_index)):
-                    print('still backtracking: \n', max_score, '\n')
+                for tuple_index in range(len(max_score_temp)):
                     if max_score[2] != max_score_temp[tuple_index][2] and max_score[1] != max_score_temp[tuple_index][1]:
                         tempresult = [[
                             self.database_sequence[max_score[1] - 1],
@@ -126,9 +125,6 @@ class needleman_wunsch(object):
         self.finalresults.append(result)
 
     def needleman_wunsch(self):
-        self.scoring_matrix
-        self.gap_value
-
         self.scoring_matrix = [[
             -1 * x + (-1 * y) for x in range(len(self.user_input) + 1)
         ] for y in range(len(self.database_sequence) + 1)]
@@ -141,14 +137,15 @@ class needleman_wunsch(object):
                     self.scoring_matrix[index_i][index_j + 1] + self.gap_value,
                     self.scoring_matrix[index_i + 1][index_j] + self.gap_value)
 
-        last_score = [
+        self.last_score = [
             self.scoring_matrix[len(self.database_sequence)][len(
                 self.user_input)],
             len(self.database_sequence),
             len(self.user_input)
         ]
-
-        self.backtracking(last_score)
+        if type(max(self.last_score)) == list:
+                    self.last_score = self.last_score[0]
+        self.backtracking(self.last_score)
         self.overall_results.append(self.finalresults)
 
 

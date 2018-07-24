@@ -12,7 +12,6 @@ class smith_waterman(object):
             for letters in [line for line in user_input[user_input.find("\n")+1:] if len(line) > 0]
             for letter in letters if letter != '\n'
         ]
-        print(self.user_input)
         self.substitution_symbols = []
         self.substitution_values = []
         self.overall_results = []
