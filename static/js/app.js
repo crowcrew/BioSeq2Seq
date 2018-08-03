@@ -34,4 +34,3 @@ $(document).ready(function(){
 		console.log($('#selected_database_files').val());
 	});
 });
-

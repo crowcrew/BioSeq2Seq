@@ -45,7 +45,8 @@ def getalignment():
     if len(selected_database_files) == 1 and os.path.isdir(selected_database_files[0]):
         selected_database_files = [selected_database_files[0] + f for f in listdir(selected_database_files[0]) if isfile(join(selected_database_files[0], f))]
     selected_database_files = json.dumps(selected_database_files)
-    return template('result', alignment = result, sequenceNames=selected_database_files)
+    user_file = json.dumps(user_file)
+    return template('result', alignment = result, sequenceNames=selected_database_files, userFile = user_file)
 
 
 if os.environ.get('APP_LOCATION') == 'heroku':

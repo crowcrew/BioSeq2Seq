@@ -21,6 +21,6 @@ if __name__ == '__main__':
         'database/database_sequence_example_smith_waterman.fa',
         'database/database_sequence_example_needleman_wunsch.fa'
     ]
-    selected_algorithms = ['needleman_wunsch', 'smith_waterman']
+    selected_algorithms = ['needleman_wunsch']
     print(findalignments(user_file, sellected_database_files,
                          selected_algorithms))
