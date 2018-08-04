@@ -2,6 +2,7 @@ import sys
 
 from algorithm_needleman_wunsch import *
 from algorithm_smith_waterman import *
+from protenizer import *
 
 
 def findalignments(user_file, sellected_database_files, selected_algorithm):
@@ -14,6 +15,9 @@ def findalignments(user_file, sellected_database_files, selected_algorithm):
         result = sw.return_overall_results()
     return result
 
+def findprotein(user_file):
+    proteinEngine = protenizer(user_file)
+    return proteinEngine.protenize()
 
 if __name__ == '__main__':
     user_file = 'TGTTACGG'

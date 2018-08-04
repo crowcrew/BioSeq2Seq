@@ -49,6 +49,14 @@ def getalignment():
     return template('result', alignment = result, sequenceNames=selected_database_files, userFile = user_file)
 
 
+@route('/getProtein', method='POST')
+def getProtein():
+    user_file =  request.POST['user_file_to_protein'].file.read()
+    protein_sequence = findprotein(user_file)
+    import json
+    user_file = json.dumps(user_file)
+    return template('protein', protein_sequence = protein_sequence, userFile = user_file)
+
 if os.environ.get('APP_LOCATION') == 'heroku':
     run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
 else:
