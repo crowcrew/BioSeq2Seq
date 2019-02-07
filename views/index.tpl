@@ -25,8 +25,25 @@
   </nav><br>
   <main role="main" class="container">
     <div class="row">
-      <div class="col-3"></div>
-      <div class="col-6 card bg-dark modifiedCard">
+      <div class="col-12 card bg-dark centered">
+        <label class="customLabel">Download Alignment Examples</label>
+        <ul class="list bg-light">
+          %for file in alignment_user_input_files:
+            <li class=""><a href={{file}} download>{{file.split('/')[-1]}}</a></li>
+          %end
+        </ul>
+        <label class="customLabel">Download Protein Production Examples</label>
+        <ul class="list bg-light">
+          %for file in protein_production_user_input_files:
+            <li class=""><a href={{file}} download>{{file.split('/')[-1]}}</a></li>
+          %end
+        </ul>
+      </div>
+      
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-4 card bg-dark">
         <label class="customLabel">Sequence Alignment</label>
         <form method="post" role="form" action="/getalignment" id=
         "getalignment" enctype="multipart/form-data" name=
@@ -54,11 +71,8 @@
           </div>
         </form>
       </div>
-    </div>
-    <br>
-    <div class="row">
-      <div class="col-3"></div>
-      <div class="col-6 card bg-dark modifiedCard">
+      <div class="col-4"></div>
+      <div class="col-4 card bg-dark">
         <label class="customLabel">Protein Production</label>
         <form method="post" role="form" action="/getProtein" id=
         "getProtein" enctype="multipart/form-data" name=
@@ -66,6 +80,7 @@
           <div class="form-group card-block">
             <input type="file" class="form-control-file bg-light"
             name="user_file_to_protein" id="user_file_to_protein">
+            <br>
             <button type="submit" class="btn btn-primary" id=
             "submit">Submit</button>
           </div>

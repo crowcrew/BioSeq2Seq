@@ -117,6 +117,9 @@ function render(AllAlignments, sequenceNames, userFile) {
     .append("circle")
     .attr("r", 10)
     .attr("fill", function(d) {
+      if(d.name==="user-sequence")
+      return "#ff00ff";
+      else 
       return "#fdb81e";
     })
     .call(
@@ -145,20 +148,6 @@ function render(AllAlignments, sequenceNames, userFile) {
         .style("opacity", 0);
     });
 
-  var text = svg
-    .append("g")
-    .attr("class", "texts")
-    .selectAll("text")
-    .data(localGraph.nodes)
-    .enter()
-    .append("text")
-    .attr("dx", 6)
-    .attr("fill", "black")
-    .style("text-anchor", "start")
-    .attr("y", -20)
-    .text(function(d) {
-      return d.name;
-    });
 
   simulation.nodes(localGraph.nodes).on("tick", ticked);
 
@@ -184,13 +173,6 @@ function render(AllAlignments, sequenceNames, userFile) {
         return d.x;
       })
       .attr("cy", function(d) {
-        return d.y;
-      });
-    text
-      .attr("x", function(d) {
-        return d.x;
-      })
-      .attr("y", function(d) {
         return d.y;
       });
   }

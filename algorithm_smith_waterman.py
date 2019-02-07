@@ -31,7 +31,7 @@ class smith_waterman(object):
 
     def read_from_files(self, filename):
         # database sequence disk read
-        openfile = open(filename, 'r')
+        openfile = open(filename, 'r', encoding="utf-8")
         readfile = openfile.read().split('\n')
         self.database_sequence = [
             letter
@@ -44,7 +44,7 @@ class smith_waterman(object):
         # substitution matrix disk read
         openfile = open(
             'hyperparameters/substitution_matrix_example_smith_waterman.txt',
-            'r')
+            'r', encoding="utf-8")
         readfile = openfile.read().split('\n')
         # reading the substitution matrix symbols
         self.substitution_symbols = [
@@ -52,7 +52,7 @@ class smith_waterman(object):
         ]
         # reading the substitution matrix values
         self.substitution_values = [
-            map(int, number) for number in
+            list(map(int, number)) for number in
             [line.split(' ') for line in readfile[1:] if len(line) > 0]
         ]
         openfile.close()

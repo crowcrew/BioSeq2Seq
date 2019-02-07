@@ -30,7 +30,7 @@ class needleman_wunsch(object):
         return self.overall_results
 
     def read_from_files(self, filename):
-        openfile = open(filename, 'r')
+        openfile = open(filename, 'r', encoding="utf-8")
         readfile = openfile.read().split('\n')
         self.database_sequence = [
             letter
@@ -42,7 +42,7 @@ class needleman_wunsch(object):
     def init_shared_parameters(self):
         openfile = open(
             'hyperparameters/substitution_matrix_example_needleman_wunsch.txt',
-            'r')
+            'r', encoding="utf-8")
         readfile = openfile.read().split('\n')
         self.substitution_symbols
         self.substitution_symbols = [
@@ -50,7 +50,7 @@ class needleman_wunsch(object):
         ]
         self.substitution_values
         self.substitution_values = [
-            map(int, number) for number in
+            list(map(int, number)) for number in
             [line.split(' ') for line in readfile[1:] if len(line) > 0]
         ]
         openfile.close()

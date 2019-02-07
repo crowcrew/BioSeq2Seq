@@ -53,6 +53,10 @@ div.tooltip {
   pointer-events: none;
 }
 
+.centered {
+    text-align: center;
+}
+
 div.protein {
   width: 50%;
   margin-left: auto;
