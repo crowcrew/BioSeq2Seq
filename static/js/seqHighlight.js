@@ -36,7 +36,7 @@ function formatOneAlignment(oneAlignment) {
 
 function render(AllAlignments, sequenceNames, userFile) {
   var width = (99 * window.innerWidth) / 100,
-    height = (90 * window.innerHeight) / 100;
+    height = (86 * window.innerHeight) / 100;
 
   var div = d3
     .select("body")

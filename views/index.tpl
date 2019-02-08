@@ -4,6 +4,7 @@
   <meta name="generator" content=
   "HTML Tidy for HTML5 for Linux version 5.2.0">
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link type="text/css" rel="stylesheet" href="static/css/app.css">
   <link type="text/css" rel="stylesheet" href=
   "static/css/bootstrap.css">
@@ -19,9 +20,8 @@
 </head>
 <body>
   <nav class=
-  "navbar navbar-expand-lg navbar-dark bg-dark static-top">
-    <a class="navbar-brand" href="/">Sequence Alignment Algorithms:
-    Applications and Implementation</a>
+  "navbar navbar-expand-sm navbar-dark bg-dark static-top">
+    <a  href="/">BioSeq2Seq</a>
   </nav><br>
   <main role="main" class="container">
     <div class="row">
@@ -86,6 +86,11 @@
           </div>
         </form>
       </div>
+    </div>
+    <div class="row">
+      <footer class="col-12 footer centered bg-dark customFooter">
+      Copyright (c) 2018-2019 Ruaa Sleiman, Aly Shmahell.
+      </footer>
     </div>
   </main>
 </body>

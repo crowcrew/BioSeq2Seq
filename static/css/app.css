@@ -19,10 +19,6 @@ body{
 	display: inline-block;
 }
 
-.modifiedCard {
-	padding: 2vw;
-}
-
 
 .list {
     overflow-y:scroll;
@@ -77,12 +73,22 @@ div.protein * {
   color: tomato;
 }
 
+.customFooter {
+    margin-top: 10px;
+    color: white;
+    bottom: 0px;
+}
+
 .links line {
   stroke: #000000;
   stroke-width: 1;
   stroke-opacity: 0.6;
 }
 
+.card, footer, nav {
+    border-color: tomato;
+    border-width: 3px;
+}
 
 ::-webkit-scrollbar {
     width:10px;
